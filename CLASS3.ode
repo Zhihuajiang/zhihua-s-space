@@ -1,0 +1,22 @@
+#equation Two-dimensional model
+
+V'= (Istim - gfast*m_infinity*(V-Ena) - gslow*w*(V-Ek) - gleak*(V-Eleak)) / C
+w'= a_w*((w_infinity-w)/tw)
+
+m_infinity = 0.5*(1+tanh((V-bm)/rm))
+# voltage-dependent activation curve is described by m
+w_infinity = 0.5*(1+tanh((V-bw)/rw))
+tw = 1/cosh((V-bw)/(2*rw))
+
+#a_w=fai_w
+
+
+par Ena=50, Ek=-100, Eleak=-70, gfast=20, gslow=20, gleak=2, Istim =0
+par a_w=0.15, C=2, bm=-1.2, rm=18, rw=10, bw=-21
+
+init V=-70, w=0.000025
+
+@ total=50,dt=0.1
+@ bound=20000
+@ meth=euler20
+done
